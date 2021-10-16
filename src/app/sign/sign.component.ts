@@ -67,7 +67,10 @@ export class SignComponent implements OnInit {
       this.signService
         .signA1(body)
         .pipe(take(1))
-        .subscribe((data:any) => {});
+        .subscribe((data:any) => {
+          const url = window.URL.createObjectURL(data)
+          window.open(url);
+        });
     });
   }
 

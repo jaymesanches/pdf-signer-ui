@@ -13,7 +13,7 @@ export class SignService {
 
   constructor(protected http: HttpClient) { }
 
-  signA1(body: FormData): Observable<void> {
-    return this.http.post<void>(this.url, body);
+  signA1(body: FormData): Observable<any> {
+    return this.http.post(this.url, body, { responseType: 'blob' });
   }
 }
