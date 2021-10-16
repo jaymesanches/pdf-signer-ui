@@ -1,0 +1,42 @@
+<h2>Sign File</h2>
+<form [formGroup]="form">
+  <div class="form-group">
+    <label for="file">File</label>
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      formControlName="file"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.file.errors }"
+    />
+    <div *ngIf="f.file.errors" class="invalid-feedback">
+      <div *ngIf="f.file.errors.required">File is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <ngx-extended-pdf-viewer
+      [src]="data"
+      useBrowserLocale="true"
+      height="80vh"
+    ></ngx-extended-pdf-viewer>
+  </div>
+  <div layout="row" class="mt-5">
+    <button
+      [disabled]="form.invalid"
+      mat-raised-button
+      color="primary"
+      (click)="openDialog()"
+    >
+      Sign A1
+    </button>
+    <span class="ml-5">
+      <button
+        mat-raised-button
+        color="secundary"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </span>
+  </div>
+</form>
