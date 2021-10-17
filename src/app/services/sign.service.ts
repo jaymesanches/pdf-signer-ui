@@ -1,9 +1,7 @@
-import { Certificate } from './../models/certificate';
-import { environment } from './../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Signer } from '../models/signer';
 import { Observable } from 'rxjs';
+import { environment } from './../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

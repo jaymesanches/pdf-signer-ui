@@ -10,11 +10,11 @@ import { CertificatesDialogComponent } from "./certificates-dialog/certificates-
   selector: "app-sign",
   templateUrl: "./sign.component.html",
   styleUrls: ["./sign.component.css"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignComponent implements OnInit {
   form!: FormGroup;
-  file!: File;
+  file!: File | any;
   filename: any;
   isPdf: any;
   data: any;
@@ -61,22 +61,23 @@ export class SignComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
 
       const body = new FormData();
-      body.append('file', this.file);
-      body.append('certificate', JSON.stringify(result));
+      body.append("file", this.file);
+      body.append("certificate", JSON.stringify(result));
 
       this.signService
         .signA1(body)
         .pipe(take(1))
-        .subscribe((data:any) => {
-          const url = window.URL.createObjectURL(data)
+        .subscribe((data: any) => {
+          const url = window.URL.createObjectURL(data);
           window.open(url);
         });
     });
   }
 
-  reset(){
+  reset() {
     this.form.reset();
     this.data = null;
+    this.file = null;
   }
 
   get f() {

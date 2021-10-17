@@ -1,23 +1,33 @@
 <h2>Sign File</h2>
 <form [formGroup]="form">
   <div class="form-group">
-    <label for="file">File</label>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      onclick="document.getElementById('fileToUpload').click()"
+    ><label>Select File</label></button>
     <input
+      id="fileToUpload"
+      style="display: none"
       type="file"
       (change)="onFileChange($event)"
       formControlName="file"
       class="form-control"
       [ngClass]="{ 'is-invalid': f.file.errors }"
+      accept = "application/pdf"
     />
-    <div *ngIf="f.file.errors" class="invalid-feedback">
+    <span class="ml-5">{{file?.name}}</span>
+    <div *ngIf="f.file.touched && f.file.errors" class="invalid-feedback">
       <div *ngIf="f.file.errors.required">File is required</div>
     </div>
   </div>
-  <div class="form-group">
+
+  <div class="form-group" style="margin-top: 20px;">
     <ngx-extended-pdf-viewer
       [src]="data"
       useBrowserLocale="true"
-      height="80vh"
+      height="70vh"
     ></ngx-extended-pdf-viewer>
   </div>
   <div layout="row" class="mt-5">
@@ -30,11 +40,7 @@
       Sign A1
     </button>
     <span class="ml-5">
-      <button
-        mat-raised-button
-        color="secundary"
-        (click)="reset()"
-      >
+      <button mat-raised-button color="secundary" (click)="reset()">
         Reset
       </button>
     </span>
