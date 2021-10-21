@@ -55,22 +55,27 @@ export class SignComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(CertificatesDialogComponent);
+    const dialogRef = this.dialog.open(CertificatesDialogComponent, {
+      minWidth: "300px",
+      disableClose: true,
+    });
 
     dialogRef.afterClosed().subscribe((result: Certificate) => {
       console.log(`Dialog result: ${result}`);
 
-      const body = new FormData();
-      body.append("file", this.file);
-      body.append("certificate", JSON.stringify(result));
+      if (result) {
+        const body = new FormData();
+        body.append("file", this.file);
+        body.append("certificate", JSON.stringify(result));
 
-      this.signService
-        .signA1(body)
-        .pipe(take(1))
-        .subscribe((data: any) => {
-          const url = window.URL.createObjectURL(data);
-          window.open(url);
-        });
+        this.signService
+          .signA1(body)
+          .pipe(take(1))
+          .subscribe((data: any) => {
+            const url = window.URL.createObjectURL(data);
+            window.open(url);
+          });
+      }
     });
   }
 

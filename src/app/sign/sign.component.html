@@ -26,7 +26,11 @@
   <div class="form-group" style="margin-top: 20px;">
     <ngx-extended-pdf-viewer
       [src]="data"
-      useBrowserLocale="true"
+      [showSidebarButton]=false
+      [showBookmarkButton]=false
+      [showFindButton]=false
+      [showOpenFileButton]=false
+      [showUnverifiedSignatures]=true
       height="70vh"
     ></ngx-extended-pdf-viewer>
   </div>
